@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MyOutlineViewController.swift
 //  SourceView
 //
 //  Translated by OOPer in cooperation with shlab.jp, on 2015/10/24.
@@ -10,22 +10,19 @@
  See LICENSE.txt for this sample’s licensing information
  
  Abstract:
- View controller containing the lower UI controls and the embedded child view controller (split view controller).
+ The master view controller containing the NSOutlineView and NSTreeController.
  */
 import Cocoa
 
-@objc(ViewController)
-class ViewController: NSViewController {
+@objc(outlineVC)
+class outlineVC: NSViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear() {
-        super.viewWillAppear()
-
     }
     
     deinit {
 
     }
 }
+

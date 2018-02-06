@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58DC0D8A202A53D1003FC9D4 /* mainWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC0D89202A53D1003FC9D4 /* mainWC.swift */; };
+		58DC0D8C202A5D01003FC9D4 /* splitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC0D8B202A5D01003FC9D4 /* splitVC.swift */; };
+		58DC0D8E202A5D9A003FC9D4 /* outlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC0D8D202A5D9A003FC9D4 /* outlineVC.swift */; };
+		58DC0D99202A5FC4003FC9D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DC0D98202A5FC3003FC9D4 /* WebKit.framework */; };
+		58DC0D9D202A62B9003FC9D4 /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC0D9C202A62B9003FC9D4 /* Prefix.swift */; };
 		EC2E3AF2202945FF008F275E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2E3AF1202945FF008F275E /* AppDelegate.swift */; };
 		EC2E3AF4202945FF008F275E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2E3AF3202945FF008F275E /* ViewController.swift */; };
 		EC2E3AF6202945FF008F275E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC2E3AF5202945FF008F275E /* Assets.xcassets */; };
@@ -33,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58DC0D89202A53D1003FC9D4 /* mainWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainWC.swift; sourceTree = "<group>"; };
+		58DC0D8B202A5D01003FC9D4 /* splitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitVC.swift; sourceTree = "<group>"; };
+		58DC0D8D202A5D9A003FC9D4 /* outlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outlineVC.swift; sourceTree = "<group>"; };
+		58DC0D98202A5FC3003FC9D4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		58DC0D9C202A62B9003FC9D4 /* Prefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefix.swift; sourceTree = "<group>"; };
 		EC2E3AEE202945FF008F275E /* Resource Master.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Resource Master.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC2E3AF1202945FF008F275E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC2E3AF3202945FF008F275E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58DC0D99202A5FC4003FC9D4 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,13 +84,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58DC0D84202A530A003FC9D4 /* Tree Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Tree Support";
+			sourceTree = "<group>";
+		};
+		58DC0D97202A5FC3003FC9D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58DC0D98202A5FC3003FC9D4 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EC2E3AE5202945FF008F275E = {
 			isa = PBXGroup;
 			children = (
+				58DC0D84202A530A003FC9D4 /* Tree Support */,
 				EC2E3AF0202945FF008F275E /* Resource Master */,
 				EC2E3B03202945FF008F275E /* Resource MasterTests */,
 				EC2E3B0E202945FF008F275E /* Resource MasterUITests */,
 				EC2E3AEF202945FF008F275E /* Products */,
+				58DC0D97202A5FC3003FC9D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,12 +124,16 @@
 		EC2E3AF0202945FF008F275E /* Resource Master */ = {
 			isa = PBXGroup;
 			children = (
+				58DC0D9C202A62B9003FC9D4 /* Prefix.swift */,
 				EC2E3AF1202945FF008F275E /* AppDelegate.swift */,
+				58DC0D89202A53D1003FC9D4 /* mainWC.swift */,
 				EC2E3AF3202945FF008F275E /* ViewController.swift */,
 				EC2E3AF5202945FF008F275E /* Assets.xcassets */,
 				EC2E3AF7202945FF008F275E /* Main.storyboard */,
 				EC2E3AFA202945FF008F275E /* Info.plist */,
 				EC2E3AFB202945FF008F275E /* Resource_Master.entitlements */,
+				58DC0D8B202A5D01003FC9D4 /* splitVC.swift */,
+				58DC0D8D202A5D9A003FC9D4 /* outlineVC.swift */,
 			);
 			path = "Resource Master";
 			sourceTree = "<group>";
@@ -257,7 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58DC0D9D202A62B9003FC9D4 /* Prefix.swift in Sources */,
 				EC2E3AF4202945FF008F275E /* ViewController.swift in Sources */,
+				58DC0D8A202A53D1003FC9D4 /* mainWC.swift in Sources */,
+				58DC0D8E202A5D9A003FC9D4 /* outlineVC.swift in Sources */,
+				58DC0D8C202A5D01003FC9D4 /* splitVC.swift in Sources */,
 				EC2E3AF2202945FF008F275E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,7 +389,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -404,7 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
