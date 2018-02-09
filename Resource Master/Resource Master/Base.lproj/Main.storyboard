@@ -803,10 +803,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="1208"/>
         </scene>
-        <!--View Controller-->
+        <!--File System View Controller-->
         <scene sceneID="lWS-sh-wAv">
             <objects>
-                <viewController id="OG4-dI-YLL" sceneMemberID="viewController">
+                <viewController id="OG4-dI-YLL" customClass="FileSystemViewController" customModule="Resource_Master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="msp-HZ-OHi">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

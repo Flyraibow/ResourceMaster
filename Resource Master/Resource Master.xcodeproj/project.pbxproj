@@ -15,6 +15,7 @@
 		EC2E3B10202945FF008F275E /* Resource_MasterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2E3B0F202945FF008F275E /* Resource_MasterUITests.swift */; };
 		EC485788202D221700BDDF4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC485787202D221700BDDF4B /* ViewController.swift */; };
 		EC48578B202D2ACA00BDDF4B /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC48578A202D2ACA00BDDF4B /* ResourceManager.swift */; };
+		EC48578E202D2F0700BDDF4B /* FileSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		EC2E3B11202945FF008F275E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC485787202D221700BDDF4B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EC48578A202D2ACA00BDDF4B /* ResourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceManager.swift; sourceTree = "<group>"; };
+		EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		EC2E3AF0202945FF008F275E /* Resource Master */ = {
 			isa = PBXGroup;
 			children = (
+				EC48578C202D2EB200BDDF4B /* LeftScrollBar */,
 				EC485789202D2A9900BDDF4B /* ResourceManager */,
 				EC485787202D221700BDDF4B /* ViewController.swift */,
 				EC2E3AF1202945FF008F275E /* AppDelegate.swift */,
@@ -145,6 +148,14 @@
 				EC48578A202D2ACA00BDDF4B /* ResourceManager.swift */,
 			);
 			path = ResourceManager;
+			sourceTree = "<group>";
+		};
+		EC48578C202D2EB200BDDF4B /* LeftScrollBar */ = {
+			isa = PBXGroup;
+			children = (
+				EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */,
+			);
+			path = LeftScrollBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC485788202D221700BDDF4B /* ViewController.swift in Sources */,
+				EC48578E202D2F0700BDDF4B /* FileSystemViewController.swift in Sources */,
 				EC48578B202D2ACA00BDDF4B /* ResourceManager.swift in Sources */,
 				EC2E3AF2202945FF008F275E /* AppDelegate.swift in Sources */,
 			);
