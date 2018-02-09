@@ -811,7 +811,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-Dq-bzi">
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-Dq-bzi" customClass="FileSystemTree" customModule="Resource_Master" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <clipView key="contentView" id="vJI-HU-TFF">
                                     <rect key="frame" x="1" y="1" width="433" height="283"/>
@@ -840,6 +840,9 @@
                             <constraint firstAttribute="bottom" secondItem="SJn-Dq-bzi" secondAttribute="bottom" id="bso-W2-xUb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fileSystemTree" destination="SJn-Dq-bzi" id="3KA-xk-Qux"/>
+                    </connections>
                 </viewController>
                 <customObject id="Hze-fL-fcG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

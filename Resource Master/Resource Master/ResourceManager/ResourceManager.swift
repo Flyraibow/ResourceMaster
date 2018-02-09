@@ -8,6 +8,9 @@
 
 import Foundation
 
+let kResourceManagerNotificationRootChanged = NSNotification.Name("kResourceManagerNotificationRootChanged");
+
+
 class ResourceManager {
   static let sharedInstance = ResourceManager()
   
@@ -28,5 +31,6 @@ class ResourceManager {
             b) ask user whether to clean the folder and initiate it
      3. complete the loading with correct folder
      */
+    NotificationCenter.default.post(name: kResourceManagerNotificationRootChanged, object: folder)
   }
 }
