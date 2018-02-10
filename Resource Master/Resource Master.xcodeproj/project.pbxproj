@@ -114,7 +114,7 @@
 		EC2E3AF0202945FF008F275E /* Resource Master */ = {
 			isa = PBXGroup;
 			children = (
-				EC48578C202D2EB200BDDF4B /* LeftScrollBar */,
+				EC48578C202D2EB200BDDF4B /* FileSystemTreeBar */,
 				EC485789202D2A9900BDDF4B /* ResourceManager */,
 				EC485787202D221700BDDF4B /* ViewController.swift */,
 				EC2E3AF1202945FF008F275E /* AppDelegate.swift */,
@@ -152,13 +152,13 @@
 			path = ResourceManager;
 			sourceTree = "<group>";
 		};
-		EC48578C202D2EB200BDDF4B /* LeftScrollBar */ = {
+		EC48578C202D2EB200BDDF4B /* FileSystemTreeBar */ = {
 			isa = PBXGroup;
 			children = (
 				EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */,
 				EC48578F202D3EDE00BDDF4B /* FileSystemTree.swift */,
 			);
-			path = LeftScrollBar;
+			path = FileSystemTreeBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
