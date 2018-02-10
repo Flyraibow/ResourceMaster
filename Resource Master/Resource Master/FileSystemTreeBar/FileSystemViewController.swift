@@ -19,8 +19,9 @@ class FileSystemViewController: NSViewController {
   }
   
   @objc func updateRootFolderPath(notification : Notification) {
-    folderPath = String(describing: notification.object)
+    folderPath = "\(notification.object ?? "")"
     // TODO: Building the file system tree with folder path
+    fileSystemTree.setRootFolder(folderPath: folderPath)
   }
   
   override var representedObject: Any? {
