@@ -37,7 +37,7 @@ class ViewController: NSViewController {
         if (path != labPath.stringValue) {
           labPath.stringValue = path
           // Updating repository
-          ResourceManager.sharedInstance.chooseFolder(folder: path)
+          ResourceManager.sharedInstance.chooseRootFolder(folder: path)
         }
       }
     } else {
@@ -51,7 +51,5 @@ class ViewController: NSViewController {
     // Update the view, if already loaded.
     }
   }
-
-
 }
 

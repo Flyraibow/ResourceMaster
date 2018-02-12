@@ -17,6 +17,7 @@
 		EC48578B202D2ACA00BDDF4B /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC48578A202D2ACA00BDDF4B /* ResourceManager.swift */; };
 		EC48578E202D2F0700BDDF4B /* FileSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */; };
 		EC485790202D3EDE00BDDF4B /* FileSystemTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC48578F202D3EDE00BDDF4B /* FileSystemTree.swift */; };
+		ECFB1E6720315CD100CEA06C /* MessageBoxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFB1E6620315CD100CEA06C /* MessageBoxManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		EC48578A202D2ACA00BDDF4B /* ResourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceManager.swift; sourceTree = "<group>"; };
 		EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemViewController.swift; sourceTree = "<group>"; };
 		EC48578F202D3EDE00BDDF4B /* FileSystemTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemTree.swift; sourceTree = "<group>"; };
+		ECFB1E6620315CD100CEA06C /* MessageBoxManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				EC48578A202D2ACA00BDDF4B /* ResourceManager.swift */,
+				ECFB1E6620315CD100CEA06C /* MessageBoxManager.swift */,
 			);
 			path = ResourceManager;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				EC485788202D221700BDDF4B /* ViewController.swift in Sources */,
 				EC48578E202D2F0700BDDF4B /* FileSystemViewController.swift in Sources */,
 				EC48578B202D2ACA00BDDF4B /* ResourceManager.swift in Sources */,
+				ECFB1E6720315CD100CEA06C /* MessageBoxManager.swift in Sources */,
 				EC485790202D3EDE00BDDF4B /* FileSystemTree.swift in Sources */,
 				EC2E3AF2202945FF008F275E /* AppDelegate.swift in Sources */,
 			);

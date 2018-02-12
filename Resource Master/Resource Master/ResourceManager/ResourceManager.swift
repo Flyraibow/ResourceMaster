@@ -20,10 +20,10 @@ class ResourceManager {
     // TODO: checking existing repository from config. If it's existed, then choose the folder
   }
   
-  func chooseFolder(folder: String) {
+  func chooseRootFolder(folder: String) {
     // TOTO:
     /*
-     1. checking whether the folder exist
+     1. ✅ checking whether the folder exist
      2. checking whether the folder is empty
           1) if empty , init the folder and create related initiate files in the folder
           2) if not mepty, checking whether it contains correct readable resource config file
@@ -31,6 +31,13 @@ class ResourceManager {
             b) ask user whether to clean the folder and initiate it
      3. complete the loading with correct folder
      */
-    NotificationCenter.default.post(name: kResourceManagerNotificationRootChanged, object: folder)
+    var isDic : ObjCBool = false;
+    FileManager.default.fileExists(atPath: folder, isDirectory: &isDic);
+    if (isDic.boolValue) {
+      NotificationCenter.default.post(name: kResourceManagerNotificationRootChanged, object: folder)
+    } else {
+      let errorMsg = "\(folder) is not directory."
+      MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: errorMsg)
+    }
   }
 }
