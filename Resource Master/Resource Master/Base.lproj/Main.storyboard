@@ -99,9 +99,10 @@
                                                 <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="mDf-zr-I0C"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Revert to Saved" keyEquivalent="r" id="KaW-ft-85H">
+                                        <menuItem title="Select Root Folder" keyEquivalent="T" id="EAc-3B-yje" userLabel="Select Root Folder">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
-                                                <action selector="revertDocumentToSaved:" target="Ady-hI-5gd" id="iJ3-Pv-kwq"/>
+                                                <action selector="clickSelectRootFolder:" target="Voe-Tx-rLC" id="f4t-dp-HdM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
@@ -743,12 +744,12 @@
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhk-IA-IHU">
                                 <rect key="frame" x="396" y="-1" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="导入" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZML-fs-Roe">
+                                <buttonCell key="cell" type="push" title="刷新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZML-fs-Roe">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="clickImport:" target="XfG-lQ-9wD" id="q99-UC-7nj"/>
+                                    <action selector="clickRefresherButton:" target="XfG-lQ-9wD" id="aoE-JS-Ubn"/>
                                 </connections>
                             </button>
                         </subviews>

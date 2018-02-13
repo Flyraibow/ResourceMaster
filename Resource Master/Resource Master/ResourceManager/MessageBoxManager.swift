@@ -29,4 +29,26 @@ class MessageBoxManager {
     alert.addButton(withTitle: "No")
     return alert.runModal() == .alertFirstButtonReturn
   }
+  
+  func showFolderSelectPanel() -> String? {
+    // 点击导入按钮，选择一个文件夹
+    let dialog = NSOpenPanel();
+    dialog.title                   = "choose a folder";
+    dialog.message                 = "choose an empty folder to initial resource tree, or choose an exising folder to load";
+    dialog.showsResizeIndicator    = true;
+    dialog.showsHiddenFiles        = false;
+    dialog.canChooseDirectories    = true;
+    dialog.canCreateDirectories    = true;
+    dialog.allowsMultipleSelection = false;
+    dialog.canChooseFiles          = false;
+    
+    if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+      let result = dialog.url // Pathname of the file
+      
+      if (result != nil) {
+        return result!.path
+      }
+    }
+    return nil
+  }
 }
