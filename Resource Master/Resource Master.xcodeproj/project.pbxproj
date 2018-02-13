@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		58DC0D99202A5FC4003FC9D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DC0D98202A5FC3003FC9D4 /* WebKit.framework */; };
+		707E6AA2203385AD00640E79 /* FileSystemItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E6AA1203385AD00640E79 /* FileSystemItem.swift */; };
 		EC2E3AF2202945FF008F275E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2E3AF1202945FF008F275E /* AppDelegate.swift */; };
 		EC2E3AF6202945FF008F275E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC2E3AF5202945FF008F275E /* Assets.xcassets */; };
 		EC2E3AF9202945FF008F275E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC2E3AF7202945FF008F275E /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		58DC0D98202A5FC3003FC9D4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		707E6AA1203385AD00640E79 /* FileSystemItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemItem.swift; sourceTree = "<group>"; };
 		EC2E3AEE202945FF008F275E /* Resource Master.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Resource Master.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC2E3AF1202945FF008F275E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC2E3AF5202945FF008F275E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				EC48578D202D2F0700BDDF4B /* FileSystemViewController.swift */,
 				EC48578F202D3EDE00BDDF4B /* FileSystemTree.swift */,
+				707E6AA1203385AD00640E79 /* FileSystemItem.swift */,
 			);
 			path = FileSystemTreeBar;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				EC485788202D221700BDDF4B /* ViewController.swift in Sources */,
 				EC48578E202D2F0700BDDF4B /* FileSystemViewController.swift in Sources */,
 				EC48578B202D2ACA00BDDF4B /* ResourceManager.swift in Sources */,
+				707E6AA2203385AD00640E79 /* FileSystemItem.swift in Sources */,
 				ECFB1E6720315CD100CEA06C /* MessageBoxManager.swift in Sources */,
 				EC485790202D3EDE00BDDF4B /* FileSystemTree.swift in Sources */,
 				EC2E3AF2202945FF008F275E /* AppDelegate.swift in Sources */,

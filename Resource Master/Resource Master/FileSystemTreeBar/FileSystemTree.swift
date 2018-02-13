@@ -29,8 +29,6 @@ class FileTreeStruct: NSObject {
         print("Error while enumerating files ")
       }
     }
-    
-    
   }
 }
 
