@@ -18,42 +18,34 @@ import Cocoa
 
 class File: NSObject {
     let name: String
-    var children = [FileItem]()
+//    var children = [FileItem]()
     
     class func fileList(_ fileName: String) -> [FileItem] {
-        //1
         var files = [FileItem]()
-        
-        
-        let fd = FileManager.default
-        fd.enumerator(atPath: fileName)?.forEach({ (e) in
-            if let fileItem = e as? String, let url = URL(string: e as! String) {
-                print(url.pathExtension)
-                files.append(FileItem(name: fileItem))
-//                let file = File(name: fileItem.object(forKey: "name") as! String)
-//                //5
-//                let items = fileItem.object(forKey: "items") as! [NSDictionary]
-//                //6
-//                for dict in items {
-//                    //7
-//                    let item = FileItem(dictionary: dict)
-//                    file.children.append(item)
-//                }
-//                //8
-//                files.append(file)
+        do {
+            let fs = try FileManager.default.contentsOfDirectory(atPath: fileName)
+            for fileName in fs {
+                let tmpItem = FileItem(name: fileName)
+                if (tmpItem.isImage() || tmpItem.isFolder()) {
+                    files.append(tmpItem)
+                }
             }
-        })
-        //2
-//        if let fileList = NSArray(contentsOfFile: fileName) as? [NSDictionary] {
-//            //3
-//            for fileItem in fileList {
-//                //4
-//
-//            }
-//        }
-        
-        //9
+        } catch {
+            print(error)
+        }
         return files
+//        var files = [FileItem]()
+//        let fd = FileManager.default
+//        fd.enumerator(atPath: fileName)?.forEach({ (e) in
+//            if let fileItem = e as? String, let url = URL(string: e as! String) {
+//                print(fileItem)
+//                let tmpItem = FileItem(name: fileItem)
+//                if (tmpItem.isImage() || tmpItem.isFolder()) {
+//                    files.append(tmpItem)
+//                }
+//            }
+//        })
+//        return files
     }
     
     init(name: String) {

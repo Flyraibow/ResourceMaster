@@ -24,6 +24,7 @@ class ResourceManager {
   func chooseRootFolder() {
     rootPath = MessageBoxManager.sharedInstance.showFolderSelectPanel()
     if (rootPath != nil) {
+        ResourceManager.sharedInstance.rootPath = rootPath
       let folderPath = rootPath!
       // TOTO:
       /*

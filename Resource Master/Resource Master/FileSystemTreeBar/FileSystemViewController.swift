@@ -49,7 +49,7 @@ extension FileSystemViewController: NSOutlineViewDataSource {
         //1
         if let file = item as? FileItem {
             if file.isFolder() {
-                return 1
+                return File.fileList(file.name).count
             }
         }
         //2
@@ -58,7 +58,7 @@ extension FileSystemViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if let file = item as? File {
-            return file.children[index]
+            return File.fileList(file.name)[index]
         }
         
         return files[index]
@@ -94,13 +94,23 @@ extension FileSystemViewController: NSOutlineViewDelegate {
         }
         else if let feedItem = item as? FileItem {
             //1
-            if (tableColumn?.identifier)!.rawValue == "timeColumn" {
+            if (tableColumn?.identifier)!.rawValue == "kindColumn" {
+                view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "kindCell"), owner: self) as? NSTableCellView
+                
+                if let textField = view?.textField {
+                    //3
+                    //                    textField.stringValue = dateFormatter.string(from: feedItem.publishingDate)
+                    textField.stringValue = feedItem.kind()
+                    textField.sizeToFit()
+                }
+            } else if (tableColumn?.identifier)!.rawValue == "sizeColumn" {
                 //2
-                view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "timeCell"), owner: self) as? NSTableCellView
+                view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sizeCell"), owner: self) as? NSTableCellView
                 
                 if let textField = view?.textField {
                     //3
 //                    textField.stringValue = dateFormatter.string(from: feedItem.publishingDate)
+                    textField.stringValue = feedItem.size()
                     textField.sizeToFit()
                 }
             } else {
@@ -110,6 +120,11 @@ extension FileSystemViewController: NSOutlineViewDelegate {
                     //5
                     textField.stringValue = feedItem.name
                     textField.sizeToFit()
+                }
+                if let imageView = view?.imageView {
+                    if feedItem.isImage() {
+                        imageView.image = feedItem.image()
+                    }
                 }
 
             }
