@@ -36,9 +36,6 @@ class FileSystemViewController: NSViewController {
     folderPath = "\(notification.object ?? "")"
     files = File.fileList(folderPath)
     self.outLineView.reloadData()
-//    self.outLineView.reloadItem(nil)
-    // TODO: Building the file system tree with folder path
-//    fileSystemTree.setRootFolder(folderPath: folderPath)
   }
   
   override var representedObject: Any? {
