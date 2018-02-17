@@ -18,15 +18,13 @@ import Cocoa
 
 class File: NSObject {
     let name: String
-//    var children = [FileItem]()
-    
     class func fileList(_ fileName: String) -> [FileItem] {
         var files = [FileItem]()
         do {
             let fs = try FileManager.default.contentsOfDirectory(atPath: fileName)
             for name in fs {
                 let tmpItem = FileItem(name: name, path: fileName)
-                if (tmpItem.isImage() || tmpItem.isFolder()) {
+                if tmpItem.shouldShow() {
                     files.append(tmpItem)
                 }
             }
@@ -35,7 +33,6 @@ class File: NSObject {
         }
         return files
     }
-    
     init(name: String) {
         self.name = name
     }

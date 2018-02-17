@@ -18,6 +18,10 @@ class FileItem: NSObject {
         self.path = path
     }
     
+    func shouldShow() -> Bool {
+        return true
+    }
+    
     func filePathName() -> String {
         return "\(self.path)/\(self.name)"
     }

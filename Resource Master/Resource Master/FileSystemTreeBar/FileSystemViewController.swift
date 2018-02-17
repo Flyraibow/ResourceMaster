@@ -82,19 +82,7 @@ extension FileSystemViewController: NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         var view: NSTableCellView?
         if let feedItem = item as? FileItem {
-            if (tableColumn?.identifier)!.rawValue == "kindColumn" {
-                view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "kindCell"), owner: self) as? NSTableCellView
-                if let textField = view?.textField {
-                    textField.stringValue = feedItem.kind()
-                    textField.sizeToFit()
-                }
-            } else if (tableColumn?.identifier)!.rawValue == "sizeColumn" {
-                view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sizeCell"), owner: self) as? NSTableCellView
-                if let textField = view?.textField {
-                    textField.stringValue = feedItem.size()
-                    textField.sizeToFit()
-                }
-            } else {
+            if (tableColumn?.identifier.rawValue == "nameColumn") {
                 view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "nameCell"), owner: self) as? NSTableCellView
                 if let textField = view?.textField {
                     textField.stringValue = feedItem.name
