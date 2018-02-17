@@ -36,32 +36,6 @@ class FileItem: NSObject {
         return exts == "png" || exts == "jpg" || exts == "jepg"
     }
     
-    func size() -> String {
-        if !self.isImage() {
-          return "--"
-        }
-        var fileSize : UInt64 = 0
-        do {
-            let attr = try FileManager.default.attributesOfItem(atPath: self.filePathName())
-            
-            fileSize = attr[FileAttributeKey.size] as! UInt64
-            let dict = attr as NSDictionary
-            fileSize = dict.fileSize()
-        } catch {
-            print("Error: \(error)")
-        }
-        return self.sizeWithUnit(kbValue: fileSize)
-    }
-    
-    func kind() -> String {
-        let ext = URL(string: self.name )?.pathExtension
-        if ext == "" || ext == nil {
-            return "Folder"
-        } else {
-            return ext!
-        }
-    }
-    
     func image() -> NSImage {
         let image = NSImage(contentsOfFile: self.filePathName())
         return image!
