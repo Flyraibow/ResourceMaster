@@ -11,17 +11,15 @@ import Cocoa
 import Cocoa
 
 class FileItem: NSObject {
-//    let url: String
     let name: String
-//    let publishingDate: Date
-    
-//    init(dictionary: NSDictionary) {
-////        self.url = dictionary.object(forKey: "url") as! String
-//        self.name = dictionary.object(forKey: "name") as! String
-////        self.publishingDate = dictionary.object(forKey: "date") as! Date
-//    }
-    init(name: String) {
+    let path: String
+    init(name: String, path: String) {
         self.name = name
+        self.path = path
+    }
+    
+    func filePathName() -> String {
+        return "\(self.path)/\(self.name)"
     }
     
     func isFolder() -> Bool {
@@ -35,21 +33,20 @@ class FileItem: NSObject {
     }
     
     func size() -> String {
-        let filePath = ResourceManager.sharedInstance.rootPath! + "/\(self.name)"
+        if !self.isImage() {
+          return "--"
+        }
         var fileSize : UInt64 = 0
-        
         do {
-            //return [FileAttributeKey : Any]
-            let attr = try FileManager.default.attributesOfItem(atPath: filePath)
-            fileSize = attr[FileAttributeKey.size] as! UInt64
+            let attr = try FileManager.default.attributesOfItem(atPath: self.filePathName())
             
-            //if you convert to NSDictionary, you can get file size old way as well.
+            fileSize = attr[FileAttributeKey.size] as! UInt64
             let dict = attr as NSDictionary
             fileSize = dict.fileSize()
         } catch {
             print("Error: \(error)")
         }
-        return String(fileSize) + " KB"
+        return self.sizeWithUnit(kbValue: fileSize)
     }
     
     func kind() -> String {
@@ -62,11 +59,20 @@ class FileItem: NSObject {
     }
     
     func image() -> NSImage {
-        let filePath = ResourceManager.sharedInstance.rootPath! + "/\(self.name)"
-        let image = NSImage(contentsOfFile: filePath)
+        let image = NSImage(contentsOfFile: self.filePathName())
         return image!
     }
     
-
+    func sizeWithUnit(kbValue: UInt64) -> String {
+        var unitIdx = 0
+        var val = kbValue
+        let tokens = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        while val > 1024 {
+            val = val / 1024
+            unitIdx += 1
+        }
+        return "\(val) \(tokens[unitIdx])"
+    }
+    
 }
 

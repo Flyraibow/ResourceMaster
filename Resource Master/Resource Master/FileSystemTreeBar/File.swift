@@ -24,8 +24,8 @@ class File: NSObject {
         var files = [FileItem]()
         do {
             let fs = try FileManager.default.contentsOfDirectory(atPath: fileName)
-            for fileName in fs {
-                let tmpItem = FileItem(name: fileName)
+            for name in fs {
+                let tmpItem = FileItem(name: name, path: fileName)
                 if (tmpItem.isImage() || tmpItem.isFolder()) {
                     files.append(tmpItem)
                 }
@@ -34,18 +34,6 @@ class File: NSObject {
             print(error)
         }
         return files
-//        var files = [FileItem]()
-//        let fd = FileManager.default
-//        fd.enumerator(atPath: fileName)?.forEach({ (e) in
-//            if let fileItem = e as? String, let url = URL(string: e as! String) {
-//                print(fileItem)
-//                let tmpItem = FileItem(name: fileItem)
-//                if (tmpItem.isImage() || tmpItem.isFolder()) {
-//                    files.append(tmpItem)
-//                }
-//            }
-//        })
-//        return files
     }
     
     init(name: String) {

@@ -30,6 +30,29 @@ class MessageBoxManager {
     return alert.runModal() == .alertFirstButtonReturn
   }
   
+    
+    func showFolderToAdd() -> String? {
+        // 点击导入按钮，选择一个文件夹
+        let dialog = NSOpenPanel();
+        dialog.title                   = "Choose files";
+        dialog.message                 = "Choose files you want to import";
+        dialog.showsResizeIndicator    = true;
+        dialog.showsHiddenFiles        = false;
+        dialog.canChooseDirectories    = false;
+        dialog.canCreateDirectories    = true;
+        dialog.allowsMultipleSelection = false;
+        dialog.canChooseFiles          = true;
+        
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url // Pathname of the file
+            
+            if (result != nil) {
+                return result!.path
+            }
+        }
+        return nil
+    }
+
   func showFolderSelectPanel() -> String? {
     // 点击导入按钮，选择一个文件夹
     let dialog = NSOpenPanel();
