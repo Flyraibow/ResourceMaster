@@ -8,8 +8,6 @@
 
 import Cocoa
 
-import Cocoa
-
 class FileItem: NSObject {
     let name: String
     let path: String
@@ -27,8 +25,19 @@ class FileItem: NSObject {
     }
     
     func isFolder() -> Bool {
-        let ext = URL(string: self.name )?.pathExtension
+        let ext = URL(string: self.name)?.pathExtension
         return  ext == "" || ext == nil
+    }
+    
+    func isAudio() -> Bool {
+        
+        let exts = URL(string: self.name)?.pathExtension
+        return exts == "mp3" || exts == "mp4"
+    }
+    
+    func isTxt() -> Bool {
+        let exts = URL(string: self.name)?.pathExtension
+        return exts == "txt"
     }
     
     func isImage() -> Bool {
@@ -39,17 +48,6 @@ class FileItem: NSObject {
     func image() -> NSImage {
         let image = NSImage(contentsOfFile: self.filePathName())
         return image!
-    }
-    
-    func sizeWithUnit(kbValue: UInt64) -> String {
-        var unitIdx = 0
-        var val = kbValue
-        let tokens = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-        while val > 1024 {
-            val = val / 1024
-            unitIdx += 1
-        }
-        return "\(val) \(tokens[unitIdx])"
     }
     
 }

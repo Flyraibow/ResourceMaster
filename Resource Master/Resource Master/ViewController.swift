@@ -18,7 +18,13 @@ class ViewController: NSViewController {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    ResourceManager.sharedInstance.checkingDefaultSettings();
+    var path = UserDefaults.standard.object(forKey: "RMSRootPath")
+    path = path == nil ? "" : path
+    self.labPath.stringValue = path as! String
+    // handle those folder used to be a valide RMS workspace but not any more
+    if !ResourceManager.sharedInstance.checkingDefaultSettings(path: path as! String) {
+        UserDefaults.standard.removeObject(forKey: "RMSRootPath")
+    }
     
     NotificationCenter.default.addObserver(self, selector: #selector(updateRootFolderPath(notification:)), name: kResourceManagerNotificationRootChanged, object: nil)
   }
@@ -35,15 +41,17 @@ class ViewController: NSViewController {
             targetUrl = FileSystemViewController.sharedInstance.folderPath
         }
         if targetUrl != "" {
-            let pickUrl = MessageBoxManager.sharedInstance.showFolderToAdd()
+            let pickUrl = MessageBoxManager.sharedInstance.selectFiles()
             let fileManager = FileManager.default
-            let fileName = URL(fileURLWithPath: pickUrl!).lastPathComponent
-            do {
-                try fileManager.copyItem(atPath: pickUrl!, toPath: "\(targetUrl)/\(fileName)")
-                NotificationCenter.default.post(name: kResourceManagerFileDeletedOrCreated, object: nil)
-            }
-            catch let error as NSError {
-                print("Ooops! Something went wrong: \(error)")
+            if pickUrl != nil {
+                let fileName = URL(fileURLWithPath: pickUrl!).lastPathComponent
+                do {
+                    try fileManager.copyItem(atPath: pickUrl!, toPath: "\(targetUrl)/\(fileName)")
+                    NotificationCenter.default.post(name: kResourceManagerFileDeletedOrCreated, object: nil)
+                }
+                catch let error as NSError {
+                    print("Ooops! Something went wrong: \(error)")
+                }
             }
         }
     }
@@ -65,7 +73,7 @@ class ViewController: NSViewController {
     
     @IBAction func clickRefresherButton(_ sender: Any) {
     if (ResourceManager.sharedInstance.rootPath == nil) {
-      ResourceManager.sharedInstance.chooseRootFolder()
+      ResourceManager.sharedInstance.chooseRootWorkSpace()
     } else {
       // TODO: Referesh the selected root folder
     }

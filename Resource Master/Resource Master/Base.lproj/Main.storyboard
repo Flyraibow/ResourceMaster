@@ -62,12 +62,12 @@
                                     <items>
                                         <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
                                             <connections>
-                                                <action selector="newDocument:" target="Ady-hI-5gd" id="4Si-XN-c54"/>
+                                                <action selector="newDataSet:" target="Voe-Tx-rLC" id="aFr-UF-9Np"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
-                                                <action selector="openDocument:" target="Ady-hI-5gd" id="bVn-NM-KNZ"/>
+                                                <action selector="openOneDataSet:" target="Voe-Tx-rLC" id="Lj4-Ar-gcY"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -676,7 +676,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Resource_Master" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Resource_Master" customModuleProvider="target">
+                    <connections>
+                        <outlet property="newDataSet" destination="Was-JA-tGl" id="asy-oA-bJZ"/>
+                        <outlet property="openOneDataSet" destination="IAo-SY-fd9" id="Hul-Bd-tUE"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -924,6 +929,7 @@
                     </connections>
                 </viewController>
                 <customObject id="Hze-fL-fcG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <treeController id="Faw-92-Oce"/>
             </objects>
             <point key="canvasLocation" x="717" y="864"/>
         </scene>

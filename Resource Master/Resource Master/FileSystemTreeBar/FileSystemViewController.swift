@@ -19,22 +19,25 @@ class FileSystemViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     dateFormatter.dateStyle = .short
-    
-    files = File.fileList(folderPath)
+    let rootPath = UserDefaults.standard.object(forKey: "RMSRootPath")
+    folderPath = rootPath == nil ? "" : rootPath as! String
+    FileSystemViewController.sharedInstance.folderPath = folderPath
+    files = FilePathManager.fileList(folderPath)
+    self.outLineView.reloadData()
     NotificationCenter.default.addObserver(self, selector: #selector(updateRootFolderPath(notification:)), name: kResourceManagerNotificationRootChanged, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(reloadOutLineView(notification:)), name: kResourceManagerFileDeletedOrCreated, object: nil)
     
   }
     
     @objc func reloadOutLineView(notification: Notification) {
-        files = File.fileList(folderPath)
+        files = FilePathManager.fileList(folderPath)
         self.outLineView.reloadData()
     }
   
   @objc func updateRootFolderPath(notification : Notification) {
     FileSystemViewController.sharedInstance.folderPath = "\(notification.object ?? "")"
     folderPath = "\(notification.object ?? "")"
-    files = File.fileList(folderPath)
+    files = FilePathManager.fileList(folderPath)
     self.outLineView.reloadData()
   }
   
@@ -54,7 +57,7 @@ extension FileSystemViewController: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let file = item as? FileItem {
             if file.isFolder() {
-                return File.fileList(file.filePathName()).count
+                return FilePathManager.fileList(file.filePathName()).count
             }
         }
         return files.count
@@ -62,7 +65,7 @@ extension FileSystemViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if let file = item as? FileItem {
-            return File.fileList(file.filePathName())[index]
+            return FilePathManager.fileList(file.filePathName())[index]
         }
         return files[index]
     }

@@ -16,7 +16,7 @@
 
 import Cocoa
 
-class File: NSObject {
+class FilePathManager: NSObject {
     let name: String
     class func fileList(_ fileName: String) -> [FileItem] {
         var files = [FileItem]()
@@ -33,6 +33,21 @@ class File: NSObject {
         }
         return files
     }
+    
+    class func validPath(path: String) -> Bool {
+        do {
+            let fs = try FileManager.default.contentsOfDirectory(atPath: path)
+            for name in fs {
+                if name == "RMSConfig.json" {
+                    return true
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return false
+    }
+    
     init(name: String) {
         self.name = name
     }

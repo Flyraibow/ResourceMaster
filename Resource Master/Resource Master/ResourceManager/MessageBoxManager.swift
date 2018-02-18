@@ -31,43 +31,32 @@ class MessageBoxManager {
   }
   
     
-    func showFolderToAdd() -> String? {
-        // 点击导入按钮，选择一个文件夹
-        let dialog = NSOpenPanel();
-        dialog.title                   = "Choose files";
-        dialog.message                 = "Choose files you want to import";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.canChooseDirectories    = false;
-        dialog.canCreateDirectories    = true;
-        dialog.allowsMultipleSelection = false;
-        dialog.canChooseFiles          = true;
-        
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            let result = dialog.url // Pathname of the file
-            
-            if (result != nil) {
-                return result!.path
-            }
-        }
-        return nil
+    func createFolder() -> String? {
+        return self.showFolderSelectPanel(title: "Create a workspace for Resource Master", message: "Create a new folder as your workspace", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
     }
-
-  func showFolderSelectPanel() -> String? {
+    
+    func selectFiles() -> String? {
+        return self.showFolderSelectPanel(title: "Choose files", message: "Choose files you want to import", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: true)
+    }
+    
+    func selectFolder() -> String? {
+        return self.showFolderSelectPanel(title: "Choose a folder", message: "Choose an empty folder to initial resource tree, or choose an existing folder to load", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
+    }
+    
+    func showFolderSelectPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, allowMutiSelec: Bool, canChooseFiles: Bool) -> String? {
     // 点击导入按钮，选择一个文件夹
     let dialog = NSOpenPanel();
-    dialog.title                   = "choose a folder";
-    dialog.message                 = "choose an empty folder to initial resource tree, or choose an exising folder to load";
-    dialog.showsResizeIndicator    = true;
-    dialog.showsHiddenFiles        = false;
-    dialog.canChooseDirectories    = true;
-    dialog.canCreateDirectories    = true;
-    dialog.allowsMultipleSelection = false;
-    dialog.canChooseFiles          = false;
+    dialog.title                   =  title;
+    dialog.message                 = message;
+    dialog.showsResizeIndicator    = sizeIndicator;
+    dialog.showsHiddenFiles        = showHidden;
+    dialog.canChooseDirectories    = canChooseDirs;
+    dialog.canCreateDirectories    = canCreateDirs;
+    dialog.allowsMultipleSelection = allowMutiSelec;
+    dialog.canChooseFiles          = canChooseFiles;
     
     if (dialog.runModal() == NSApplication.ModalResponse.OK) {
       let result = dialog.url // Pathname of the file
-      
       if (result != nil) {
         return result!.path
       }
@@ -75,3 +64,5 @@ class MessageBoxManager {
     return nil
   }
 }
+
+
