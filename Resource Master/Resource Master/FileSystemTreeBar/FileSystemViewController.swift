@@ -89,10 +89,11 @@ extension FileSystemViewController: NSOutlineViewDelegate {
                     textField.sizeToFit()
                 }
                 if let imageView = view?.imageView {
+                    imageView.image = feedItem.fileIcon()
                     if feedItem.isImage() {
                         imageView.image = feedItem.image()
                     } else {
-                        imageView.image = NSImage(named:NSImage.Name(rawValue: "NSFolder"))
+                        imageView.image = feedItem.fileIcon()
                     }
                 }
             }

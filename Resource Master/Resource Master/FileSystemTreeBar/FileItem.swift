@@ -50,5 +50,11 @@ class FileItem: NSObject {
         return image!
     }
     
+    func fileIcon() -> NSImage {
+        let size = 64;
+        let image = NSWorkspace.shared.icon(forFile: self.filePathName())
+        image.size = NSMakeSize(CGFloat(size), CGFloat(size))
+        return image
+    }
 }
 

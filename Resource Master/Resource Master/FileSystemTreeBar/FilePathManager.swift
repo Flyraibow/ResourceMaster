@@ -28,11 +28,11 @@ class FilePathManager: NSObject {
                     files.append(tmpItem)
                 }
             }
-        } catch {
-            print(error)
+        } catch {            print(error)
         }
         return files
     }
+    
     
     class func validPath(path: String) -> Bool {
         do {
