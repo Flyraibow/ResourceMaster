@@ -15,14 +15,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   
     @IBAction func clickSelectRootFolder(_ sender: Any) {
-        ResourceManager.sharedInstance.chooseRootWorkSpace()
+        RMResourceManager.sharedInstance.chooseRootWorkSpace()
     }
     
     @IBAction func openOneDataSet(_ sender: Any) {
-        ResourceManager.sharedInstance.chooseRootWorkSpace()
+        RMResourceManager.sharedInstance.chooseRootWorkSpace()
     }
     @IBAction func newDataSet(_ sender: Any) {
-        ResourceManager.sharedInstance.createNewWorkSpace()
+        RMResourceManager.sharedInstance.createNewWorkSpace()
     }
 }
 

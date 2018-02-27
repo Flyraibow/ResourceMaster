@@ -11,8 +11,8 @@ import Foundation
 let kResourceManagerNotificationRootChanged = NSNotification.Name("kResourceManagerNotificationRootChanged");
 
 
-class ResourceManager {
-  static let sharedInstance = ResourceManager()
+class RMResourceManager {
+  static let sharedInstance = RMResourceManager()
   var rootPath : String?
   
   private init() {
@@ -20,7 +20,7 @@ class ResourceManager {
 
   func checkingDefaultSettings(path: String, showError: Bool = true) -> Bool {
     // TODO: checking existing repository from config. If it's existed, then choose the folder
-    let ans = FilePathManager.validPath(path: path)
+    let ans = RMFilePathManager.validPath(path: path)
     if (!ans && showError ) {
       let errorMsg = "\(path) is not a RSM directory."
       MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: errorMsg)
@@ -31,7 +31,7 @@ class ResourceManager {
   func chooseRootWorkSpace() {
     rootPath = MessageBoxManager.sharedInstance.selectFolder()
     if (rootPath != nil) {
-      ResourceManager.sharedInstance.rootPath = rootPath
+      this.sharedInstance.rootPath = rootPath
       let folderPath = rootPath!
       // TOTO:
       /*
@@ -64,7 +64,7 @@ class ResourceManager {
       // Initialize workplace path
       do {
         try FileManager.default.createDirectory(atPath: workplacePath, withIntermediateDirectories: false, attributes: nil);
-        if (FilePathManager.InitializeWorkplace(path: workplacePath)) {
+        if (RMFilePathManager.InitializeWorkplace(path: workplacePath)) {
           // Create work space successfully
           // TODO : set default work space
           // TODO : refresh default work space

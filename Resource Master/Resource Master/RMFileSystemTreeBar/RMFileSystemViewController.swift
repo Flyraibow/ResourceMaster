@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class FileSystemViewController: NSViewController {
+class RMFileSystemViewController: NSViewController {
   var folderPath : String = "";
   var selectedFileUrl : String = ""
-  static let sharedInstance = FileSystemViewController()
+  static let sharedInstance = RMFileSystemViewController()
   @IBOutlet weak var outLineView: NSOutlineView!
-  var files = [FileItem]()
+  var files = [RMFileItem]()
   let dateFormatter = DateFormatter()
   
   override func viewDidLoad() {
@@ -21,8 +21,8 @@ class FileSystemViewController: NSViewController {
     dateFormatter.dateStyle = .short
     let rootPath = UserDefaults.standard.object(forKey: "RMSRootPath")
     folderPath = rootPath == nil ? "" : rootPath as! String
-    FileSystemViewController.sharedInstance.folderPath = folderPath
-    files = FilePathManager.fileList(folderPath)
+    RMFileSystemViewController.sharedInstance.folderPath = folderPath
+    files = RMFilePathManager.fileList(folderPath)
     self.outLineView.reloadData()
     NotificationCenter.default.addObserver(self, selector: #selector(updateRootFolderPath(notification:)), name: kResourceManagerNotificationRootChanged, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(reloadOutLineView(notification:)), name: kResourceManagerFileDeletedOrCreated, object: nil)
@@ -30,14 +30,14 @@ class FileSystemViewController: NSViewController {
   }
     
     @objc func reloadOutLineView(notification: Notification) {
-        files = FilePathManager.fileList(folderPath)
+        files = RMFilePathManager.fileList(folderPath)
         self.outLineView.reloadData()
     }
   
   @objc func updateRootFolderPath(notification : Notification) {
-    FileSystemViewController.sharedInstance.folderPath = "\(notification.object ?? "")"
+    RMFileSystemViewController.sharedInstance.folderPath = "\(notification.object ?? "")"
     folderPath = "\(notification.object ?? "")"
-    files = FilePathManager.fileList(folderPath)
+    files = RMFilePathManager.fileList(folderPath)
     self.outLineView.reloadData()
   }
   
@@ -53,35 +53,35 @@ class FileSystemViewController: NSViewController {
 }
 
 
-extension FileSystemViewController: NSOutlineViewDataSource {
+extension RMFileSystemViewController: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let file = item as? FileItem {
+        if let file = item as? RMFileItem {
             if file.isFolder() {
-                return FilePathManager.fileList(file.filePathName()).count
+                return RMFilePathManager.fileList(file.filePathName()).count
             }
         }
         return files.count
     }
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if let file = item as? FileItem {
-            return FilePathManager.fileList(file.filePathName())[index]
+        if let file = item as? RMFileItem {
+            return RMFilePathManager.fileList(file.filePathName())[index]
         }
         return files[index]
     }
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        if let file = item as? FileItem {
+        if let file = item as? RMFileItem {
             return file.isFolder()
         }
         return false
     }
 }
 
-extension FileSystemViewController: NSOutlineViewDelegate {
+extension RMFileSystemViewController: NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         var view: NSTableCellView?
-        if let feedItem = item as? FileItem {
+        if let feedItem = item as? RMFileItem {
             if (tableColumn?.identifier.rawValue == "nameColumn") {
                 view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "nameCell"), owner: self) as? NSTableCellView
                 if let textField = view?.textField {
@@ -106,8 +106,8 @@ extension FileSystemViewController: NSOutlineViewDelegate {
             return
         }
         let selectedIndex = outlineView.selectedRow
-        if let feedItem = outlineView.item(atRow: selectedIndex) as? FileItem {
-            FileSystemViewController.sharedInstance.selectedFileUrl = feedItem.filePathName()
+        if let feedItem = outlineView.item(atRow: selectedIndex) as? RMFileItem {
+            RMFileSystemViewController.sharedInstance.selectedFileUrl = feedItem.filePathName()
         }
     }
 }

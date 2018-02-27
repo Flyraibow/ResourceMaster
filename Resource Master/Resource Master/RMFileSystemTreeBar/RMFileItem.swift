@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class FileItem: NSObject {
+class RMFileItem: NSObject {
     let name: String
     let path: String
     init(name: String, path: String) {

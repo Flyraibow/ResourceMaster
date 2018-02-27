@@ -18,14 +18,14 @@ import Cocoa
 
 let RMSConfig_json : String = "RMSConfig.json";
 
-class FilePathManager: NSObject {
+class RMFilePathManager: NSObject {
   let name: String
-  class func fileList(_ fileName: String) -> [FileItem] {
-    var files = [FileItem]()
+  class func fileList(_ fileName: String) -> [RMFileItem] {
+    var files = [RMFileItem]()
     do {
       let fs = try FileManager.default.contentsOfDirectory(atPath: fileName)
       for name in fs {
-        let tmpItem = FileItem(name: name, path: fileName)
+        let tmpItem = RMFileItem(name: name, path: fileName)
         if tmpItem.shouldShow() {
           files.append(tmpItem)
         }

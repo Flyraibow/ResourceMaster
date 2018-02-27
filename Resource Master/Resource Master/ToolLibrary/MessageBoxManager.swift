@@ -60,7 +60,6 @@ class MessageBoxManager {
   }
   
   func showFolderSelectPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, allowMutiSelec: Bool, canChooseFiles: Bool) -> String? {
-    // 点击导入按钮，选择一个文件夹
     let dialog = NSOpenPanel();
     dialog.title                   =  title;
     dialog.message                 = message;

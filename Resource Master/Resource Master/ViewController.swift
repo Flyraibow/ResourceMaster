@@ -22,7 +22,7 @@ class ViewController: NSViewController {
     path = path == nil ? "" : path
     self.labPath.stringValue = path as! String
     // handle those folder used to be a valide RMS workspace but not any more
-    if !ResourceManager.sharedInstance.checkingDefaultSettings(path: path as! String, showError: false) {
+    if !RMResourceManager.sharedInstance.checkingDefaultSettings(path: path as! String, showError: false) {
       UserDefaults.standard.removeObject(forKey: "RMSRootPath")
     }
     
@@ -36,9 +36,9 @@ class ViewController: NSViewController {
   
   
   @IBAction func didTapAdd(_ sender: Any) {
-    var targetUrl = FileSystemViewController.sharedInstance.selectedFileUrl
+    var targetUrl = RMFileSystemViewController.sharedInstance.selectedFileUrl
     if targetUrl == "" {
-      targetUrl = FileSystemViewController.sharedInstance.folderPath
+      targetUrl = RMFileSystemViewController.sharedInstance.folderPath
     }
     if targetUrl != "" {
       let pickUrl = MessageBoxManager.sharedInstance.selectFiles()
@@ -57,13 +57,13 @@ class ViewController: NSViewController {
   }
   
   @IBAction func didTapDelete(_ sender: Any) {
-    let targetUrl = FileSystemViewController.sharedInstance.selectedFileUrl
+    let targetUrl = RMFileSystemViewController.sharedInstance.selectedFileUrl
     if (targetUrl != "") {
       let fileManager = FileManager.default
       do {
         try fileManager.trashItem(at: URL(fileURLWithPath: targetUrl), resultingItemURL: nil)
         NotificationCenter.default.post(name: kResourceManagerFileDeletedOrCreated, object: nil)
-        FileSystemViewController.sharedInstance.selectedFileUrl = ""
+        RMFileSystemViewController.sharedInstance.selectedFileUrl = ""
       }
       catch let error as NSError {
         print("Ooops! Something went wrong: \(error)")
@@ -72,8 +72,8 @@ class ViewController: NSViewController {
   }
   
   @IBAction func clickRefresherButton(_ sender: Any) {
-    if (ResourceManager.sharedInstance.rootPath == nil) {
-      ResourceManager.sharedInstance.chooseRootWorkSpace()
+    if (RMResourceManager.sharedInstance.rootPath == nil) {
+      RMResourceManager.sharedInstance.chooseRootWorkSpace()
     } else {
       // TODO: Referesh the selected root folder
     }
