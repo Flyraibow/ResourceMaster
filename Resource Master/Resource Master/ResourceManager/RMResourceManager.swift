@@ -31,7 +31,7 @@ class RMResourceManager {
   func chooseRootWorkSpace() {
     rootPath = MessageBoxManager.sharedInstance.selectFolder()
     if (rootPath != nil) {
-      this.sharedInstance.rootPath = rootPath
+      RMResourceManager.sharedInstance.rootPath = rootPath
       let folderPath = rootPath!
       // TOTO:
       /*
