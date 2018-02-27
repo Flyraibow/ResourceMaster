@@ -60,12 +60,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
+                                        <menuItem title="Create Workplace" keyEquivalent="n" id="Was-JA-tGl">
                                             <connections>
                                                 <action selector="newDataSet:" target="Voe-Tx-rLC" id="aFr-UF-9Np"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                                        <menuItem title="Open Existing Workplace" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
                                                 <action selector="openOneDataSet:" target="Voe-Tx-rLC" id="Lj4-Ar-gcY"/>
                                             </connections>

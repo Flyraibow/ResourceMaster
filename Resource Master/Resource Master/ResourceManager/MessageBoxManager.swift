@@ -30,20 +30,36 @@ class MessageBoxManager {
     return alert.runModal() == .alertFirstButtonReturn
   }
   
+  
+  func createWorkplace() -> String {
+    let msg = NSAlert()
+    msg.addButton(withTitle: "OK")      // 1st button
+    msg.addButton(withTitle: "Cancel")  // 2nd button
+    msg.messageText = "Create a workspace for Resource Master"
+    msg.informativeText = "Create a new folder as your workspace"
     
-    func createFolder() -> String? {
-        return self.showFolderSelectPanel(title: "Create a workspace for Resource Master", message: "Create a new folder as your workspace", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
+    let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+    txt.stringValue = "My Workplace"
+    
+    msg.accessoryView = txt
+    let response: NSApplication.ModalResponse = msg.runModal()
+    
+    if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
+      return txt.stringValue
+    } else {
+      return ""
     }
-    
-    func selectFiles() -> String? {
-        return self.showFolderSelectPanel(title: "Choose files", message: "Choose files you want to import", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: true)
-    }
-    
-    func selectFolder() -> String? {
-        return self.showFolderSelectPanel(title: "Choose a folder", message: "Choose an empty folder to initial resource tree, or choose an existing folder to load", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
-    }
-    
-    func showFolderSelectPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, allowMutiSelec: Bool, canChooseFiles: Bool) -> String? {
+  }
+  
+  func selectFiles() -> String? {
+    return self.showFolderSelectPanel(title: "Choose files", message: "Choose files you want to import", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: true)
+  }
+  
+  func selectFolder() -> String? {
+    return self.showFolderSelectPanel(title: "Choose a folder", message: "Choose an empty folder to initial resource tree, or choose an existing folder to load", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
+  }
+  
+  func showFolderSelectPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, allowMutiSelec: Bool, canChooseFiles: Bool) -> String? {
     // 点击导入按钮，选择一个文件夹
     let dialog = NSOpenPanel();
     dialog.title                   =  title;
