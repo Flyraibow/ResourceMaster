@@ -16,6 +16,7 @@ let FILE_DESC = "desc";
 let FILE_TAG = "tag";
 
 let FILE_TYPE_FOLDER = "folder";
+let FILE_TYPE_UNKNOWN = "unknown";
 
 enum RMFileTreeNodeError: Error {
   case wrongJsonFileFormat
@@ -61,7 +62,7 @@ class RMFileTreeNode: NSObject {
   }
   
   init(fileName: String, parentNode:RMFileTreeNode?, actualPath: String? = nil, desc: String? = nil, tags:Array<String>? = nil) {
-    self.isFolder = true;
+    isFolder = true;
     super.init()
     self.fileName = fileName;
     self.parent = parentNode;
@@ -83,10 +84,9 @@ class RMFileTreeNode: NSObject {
       } else {
         // TODO: file is not in the file system, make a copy
       }
-    } else if (parentNode != nil) {
-      self.path = (parentNode!.path! as NSString).appendingPathComponent(fileName);
-      self.fileType = FILE_TYPE_FOLDER
     }
+    
+    self.fileType = isFolder ? FILE_TYPE_FOLDER : FILE_TYPE_UNKNOWN;
   }
   
   func appendNode(fileNode: RMFileTreeNode) -> Bool {
@@ -95,6 +95,8 @@ class RMFileTreeNode: NSObject {
         fileList = Array<RMFileTreeNode>()
       }
       self.fileList!.append(fileNode)
+      fileNode.parent = self;
+      fileNode.path = (self.path! as NSString).appendingPathComponent(fileNode.fileName!);
       return true;
     }
     return false;
