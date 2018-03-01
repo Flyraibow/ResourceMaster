@@ -16,7 +16,7 @@
 
 import Cocoa
 
-let RMSConfig_json : String = "RMSConfig.json";
+let kRMSConfigFileName : String = "RMSConfig.json";
 
 class RMFilePathManager: NSObject {
   let name: String
@@ -39,27 +39,16 @@ class RMFilePathManager: NSObject {
   class func InitializeWorkplace(path: String) -> Bool {
     var isDic : ObjCBool = false;
     assert(FileManager.default.fileExists(atPath: path, isDirectory: &isDic) && isDic.boolValue, "Invalid workplace path");
-    let jsonFilePath = path + "/" + RMSConfig_json;
+    let jsonFilePath = (path as NSString).appendingPathComponent(kRMSConfigFileName);
     assert(FileManager.default.fileExists(atPath: jsonFilePath) == false, "workplace already exist");
-    // TODO: write json file
-    let jsonFileString = "{}";
-    let jsonFileData = jsonFileString.data(using: String.Encoding.utf8)
-    return FileManager.default.createFile(atPath: jsonFilePath, contents: jsonFileData, attributes: nil);
+    let defaultFileTree = createDefaultRMFileTree(path: path)!;
+    return defaultFileTree.createFileDirectories();
   }
   
   
   class func validPath(path: String) -> Bool {
-    do {
-      let fs = try FileManager.default.contentsOfDirectory(atPath: path)
-      for name in fs {
-        if name == RMSConfig_json {
-          return true
-        }
-      }
-    } catch {
-      print(error)
-    }
-    return false
+    let configPath = (path as NSString).appendingPathComponent(kRMSConfigFileName);
+    return FileManager.default.fileExists(atPath: configPath);
   }
   
   init(name: String) {

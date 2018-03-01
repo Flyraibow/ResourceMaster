@@ -60,7 +60,7 @@ class RMResourceManager {
     let workplaceDic :String = MessageBoxManager.sharedInstance.createWorkplace()
     if (workplaceDic.count > 0) {
       let workplaceDicPath = MessageBoxManager.sharedInstance.showFolderSelectPanel(title: "Choose the path of workplace", message: "Choose a folder to initialize your workplace", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
-      let workplacePath = workplaceDicPath! + "/" + workplaceDic;
+      let workplacePath = (workplaceDicPath! as NSString).appendingPathComponent(workplaceDic);
       // Initialize workplace path
       do {
         try FileManager.default.createDirectory(atPath: workplacePath, withIntermediateDirectories: false, attributes: nil);
