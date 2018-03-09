@@ -10,6 +10,8 @@ import Foundation
 
 let kResourceManagerNotificationRootChanged = NSNotification.Name("kResourceManagerNotificationRootChanged");
 
+let DEFAULT_ROOT_PATH = "DEFAULT_ROOT_PATH";
+
 
 class RMResourceManager {
   static let sharedInstance = RMResourceManager()
@@ -18,43 +20,12 @@ class RMResourceManager {
   private init() {
   }
 
-  func checkingDefaultSettings(path: String, showError: Bool = true) -> Bool {
-    // TODO: checking existing repository from config. If it's existed, then choose the folder
-    let ans = RMFilePathManager.validPath(path: path)
-    if (!ans && showError ) {
-      let errorMsg = "\(path) is not a RSM directory."
-      MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: errorMsg)
-    }
-    return ans
-  }
-  
   func chooseRootWorkSpace() {
     rootPath = MessageBoxManager.sharedInstance.selectFolder()
     if (rootPath != nil) {
-      RMResourceManager.sharedInstance.rootPath = rootPath
-      let folderPath = rootPath!
-      // TOTO:
-      /*
-       1. ✅ checking whether the folder exist
-       2. checking whether the folder is empty
-       1) if empty , init the folder and create related initiate files in the folder
-       2) if not mepty, checking whether it contains correct readable resource config file
-       a) if it passes the check then, load the resources
-       b) ask user whether to clean the folder and initiate it
-       3. complete the loading with correct folder
-       */
-      var isDic : ObjCBool = false;
-      FileManager.default.fileExists(atPath: folderPath, isDirectory: &isDic);
-      let isValideRSMPath = self.checkingDefaultSettings(path: folderPath)
-      if (isDic.boolValue && isValideRSMPath) {
-        let defaults = UserDefaults.standard
-        defaults.set(folderPath, forKey: "RMSRootPath")
-        NotificationCenter.default.post(name: kResourceManagerNotificationRootChanged, object: folderPath)
-      }
+      self.gotoVerifiedWorkSpace(rootPath: rootPath!);
     }
   }
-  
-  
   
   func createNewWorkSpace() {
     let workplaceDic :String = MessageBoxManager.sharedInstance.createWorkplace()
@@ -64,14 +35,36 @@ class RMResourceManager {
       // Initialize workplace path
       do {
         try FileManager.default.createDirectory(atPath: workplacePath, withIntermediateDirectories: false, attributes: nil);
-        if (RMFilePathManager.InitializeWorkplace(path: workplacePath)) {
+        if (initializeWorkplace(path: workplacePath)) {
           // Create work space successfully
-          // TODO : set default work space
-          // TODO : refresh default work space
+          self.gotoVerifiedWorkSpace(rootPath: workplacePath);
         }
       } catch let error as NSError {
         MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: error.localizedDescription)
       }
+    }
+  }
+  
+  func gotoVerifiedWorkSpace(rootPath: String) {
+    RMResourceManager.sharedInstance.rootPath = rootPath
+    // TOTO:
+    /*
+     1. ✅ checking whether the folder exist
+     2. checking whether the folder is empty
+     1) if empty , init the folder and create related initiate files in the folder
+     2) if not mepty, checking whether it contains correct readable resource config file
+     a) if it passes the check then, load the resources
+     b) ask user whether to clean the folder and initiate it
+     3. complete the loading with correct folder
+     */
+    var isDic : ObjCBool = false;
+    FileManager.default.fileExists(atPath: rootPath, isDirectory: &isDic);
+    
+    let configPath = (rootPath as NSString).appendingPathComponent(kRMSConfigFileName);
+    let isValideRSMPath = FileManager.default.fileExists(atPath: configPath)
+    if (isDic.boolValue && isValideRSMPath) {
+      UserDefaults.standard.set(rootPath, forKey: DEFAULT_ROOT_PATH)
+      NotificationCenter.default.post(name: kResourceManagerNotificationRootChanged, object: rootPath)
     }
   }
 }

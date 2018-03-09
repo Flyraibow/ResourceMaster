@@ -18,13 +18,16 @@ let FILE_TAG = "tag";
 let FILE_TYPE_FOLDER = "folder";
 let FILE_TYPE_UNKNOWN = "unknown";
 
+let kRMSConfigFileName = "RMSConfig.json";
+
 enum RMFileTreeNodeError: Error {
   case wrongJsonFileFormat
   case WrongConfigPath
 }
 
 class RMFileTreeNode: NSObject {
-  var fileName: String?;
+  var isRoot: Bool;
+  var fileName: String;
   var fileType: String?;
   var fileList: Array<RMFileTreeNode>?;
   var isFolder: Bool;
@@ -33,17 +36,20 @@ class RMFileTreeNode: NSObject {
   var parent :RMFileTreeNode?;
   var path: String?
   
-  init(json: Any, parentPath: String) {
+  init(json: Any, parentPath: String, isRoot : Bool = false) {
     isFolder = false;
+    fileName = "undefined";
+    self.isRoot = isRoot;
     super.init();
     isFolder = false;
     if let jsonObj = json as? Dictionary<String, Any> {
-      fileName = jsonObj[FILE_NAME] as? String;
+      if let name = jsonObj[FILE_NAME] {
+        fileName = name as! String;
+      }
       fileType = jsonObj[FILE_TYPE] as? String;
-      if fileName != nil {
-        path = (parentPath as NSString).appendingPathComponent(fileName!);
+      if !isRoot {
+        path = (parentPath as NSString).appendingPathComponent(fileName);
       } else {
-        // for root
         path = parentPath;
       }
       desc = jsonObj[FILE_DESC] as? String;
@@ -61,10 +67,11 @@ class RMFileTreeNode: NSObject {
     }
   }
   
-  init(fileName: String, parentNode:RMFileTreeNode?, actualPath: String? = nil, desc: String? = nil, tags:Array<String>? = nil) {
+  init(fileName: String, parentNode:RMFileTreeNode?, actualPath: String? = nil, desc: String? = nil, tags:Array<String>? = nil, isRoot: Bool = false) {
     isFolder = true;
-    super.init()
     self.fileName = fileName;
+    self.isRoot = isRoot;
+    super.init()
     self.parent = parentNode;
     self.desc = desc;
     self.tagList = tags;
@@ -96,7 +103,7 @@ class RMFileTreeNode: NSObject {
       }
       self.fileList!.append(fileNode)
       fileNode.parent = self;
-      fileNode.path = (self.path! as NSString).appendingPathComponent(fileNode.fileName!);
+      fileNode.path = (self.path! as NSString).appendingPathComponent(fileNode.fileName);
       return true;
     }
     return false;
@@ -106,10 +113,10 @@ class RMFileTreeNode: NSObject {
     var fileNameSet = Set<String>()
     if self.fileList != nil {
       for fileNode in self.fileList! {
-        if fileNameSet.contains(fileNode.fileName!) {
+        if fileNameSet.contains(fileNode.fileName) {
           return false;
         }
-        fileNameSet.insert(fileNode.fileName!);
+        fileNameSet.insert(fileNode.fileName);
       }
     }
     return true;
@@ -179,8 +186,9 @@ class RMFileTree: NSObject {
   init(json: Any) throws {
     if let jsonObj = json as? Dictionary<String, Any> {
       workPath = jsonObj[WORK_PATH] as? String;
-      virtualFileNode = RMFileTreeNode.init(json: json, parentPath: workPath!);
+      virtualFileNode = RMFileTreeNode.init(json: json, parentPath: workPath!, isRoot: true);
       virtualFileNode.isFolder = true;
+      virtualFileNode.fileName = "Work Space";
       super.init();
       virtualFileNode.setFileTree(fileTree: self);
       if configPath == nil && workPath != nil {
@@ -201,6 +209,11 @@ class RMFileTree: NSObject {
       print(error.localizedDescription)
     }
     throw RMFileTreeNodeError.WrongConfigPath
+  }
+  
+  convenience init(rootPath: String) throws {
+    let configPath = (rootPath as NSString).appendingPathComponent(kRMSConfigFileName);
+    try self.init(confPath: configPath);
   }
   
   func jsonObject() -> Any {

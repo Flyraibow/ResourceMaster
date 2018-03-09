@@ -825,7 +825,7 @@
         <!--File System View Controller-->
         <scene sceneID="lWS-sh-wAv">
             <objects>
-                <viewController id="OG4-dI-YLL" customClass="FileSystemViewController" customModule="Resource_Master" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OG4-dI-YLL" customClass="RMFileSystemViewController" customModule="Resource_Master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="msp-HZ-OHi">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -843,7 +843,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="nameColumn" width="300" minWidth="40" maxWidth="1000" id="ANh-nK-099">
+                                                <tableColumn identifier="nameColumn" width="223" minWidth="40" maxWidth="1000" id="ANh-nK-099">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -856,8 +856,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="nameCell" id="GoA-yZ-tbk">
-                                                            <rect key="frame" x="1" y="1" width="300" height="17"/>
+                                                        <tableCellView identifier="nameCell" misplaced="YES" id="GoA-yZ-tbk">
+                                                            <rect key="frame" x="1" y="1" width="223" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eun-w8-9gP">

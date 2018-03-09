@@ -8,6 +8,15 @@
 
 import Foundation
 
+func initializeWorkplace(path: String) -> Bool {
+  var isDic : ObjCBool = false;
+  assert(FileManager.default.fileExists(atPath: path, isDirectory: &isDic) && isDic.boolValue, "Invalid workplace path");
+  let jsonFilePath = (path as NSString).appendingPathComponent(kRMSConfigFileName);
+  assert(FileManager.default.fileExists(atPath: jsonFilePath) == false, "workplace already exist");
+  let defaultFileTree = createDefaultRMFileTree(path: path)!;
+  return defaultFileTree.createFileDirectories();
+}
+
 func createDefaultRMFileTree(path: String) -> RMFileTree? {
   var dict = Dictionary<String, Any>();
   dict[WORK_PATH] = path;
