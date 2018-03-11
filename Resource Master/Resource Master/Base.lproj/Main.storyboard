@@ -716,22 +716,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="dSb-Xc-yx3">
+                            <box verticalHuggingPriority="750" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="dSb-Xc-yx3">
                                 <rect key="frame" x="0.0" y="40" width="480" height="5"/>
                             </box>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="flY-pb-haf">
-                                <rect key="frame" x="16" y="11" width="20" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="9Wr-IQ-IFM"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dlD-lh-LcU">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="didTapAdd:" target="XfG-lQ-9wD" id="OZ7-Pj-q3Z"/>
-                                </connections>
-                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m02-Ca-v16">
                                 <rect key="frame" x="224" y="10" width="32" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Path" id="xMd-8E-j4i">
@@ -746,46 +733,15 @@
                                     <segue destination="3mA-2R-Ovb" kind="embed" id="PLF-cM-dzk"/>
                                 </connections>
                             </containerView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wOG-43-BWR">
-                                <rect key="frame" x="44" y="10" width="20" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="4xP-fY-vSd"/>
-                                    <constraint firstAttribute="width" constant="20" id="QJO-vP-7AN"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yEd-Y7-Zgc">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="didTapDelete:" target="XfG-lQ-9wD" id="zpD-NS-YNV"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhk-IA-IHU">
-                                <rect key="frame" x="396" y="-1" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="刷新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZML-fs-Roe">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="clickRefresherButton:" target="XfG-lQ-9wD" id="aoE-JS-Ubn"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="wOG-43-BWR" secondAttribute="bottom" constant="11" id="3Td-aE-Ua2"/>
                             <constraint firstItem="dSb-Xc-yx3" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="4pj-FF-Utq"/>
                             <constraint firstAttribute="trailing" secondItem="fZ0-N7-a6w" secondAttribute="trailing" id="Glk-GT-L80"/>
-                            <constraint firstAttribute="trailing" secondItem="nhk-IA-IHU" secondAttribute="trailing" constant="20" id="HZ0-ov-YB2"/>
                             <constraint firstItem="fZ0-N7-a6w" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="Int-bz-NCk"/>
                             <constraint firstItem="fZ0-N7-a6w" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="KD5-9X-nuH"/>
-                            <constraint firstItem="flY-pb-haf" firstAttribute="top" secondItem="fZ0-N7-a6w" secondAttribute="bottom" constant="10" id="MR8-je-I1C"/>
                             <constraint firstAttribute="bottom" secondItem="fZ0-N7-a6w" secondAttribute="bottom" constant="41" id="O3d-Ua-aZg"/>
-                            <constraint firstItem="flY-pb-haf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="16" id="OCo-sL-lRW"/>
                             <constraint firstAttribute="trailing" secondItem="dSb-Xc-yx3" secondAttribute="trailing" id="TQK-tE-07U"/>
-                            <constraint firstItem="wOG-43-BWR" firstAttribute="top" secondItem="dSb-Xc-yx3" secondAttribute="bottom" constant="11" id="Zeb-Wl-t4B"/>
                             <constraint firstItem="m02-Ca-v16" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="eMk-RM-6CA"/>
-                            <constraint firstItem="wOG-43-BWR" firstAttribute="leading" secondItem="flY-pb-haf" secondAttribute="trailing" constant="8" id="prW-WK-0yq"/>
-                            <constraint firstAttribute="bottom" secondItem="nhk-IA-IHU" secondAttribute="bottom" constant="6" id="sne-df-ZdU"/>
                             <constraint firstAttribute="bottom" secondItem="m02-Ca-v16" secondAttribute="bottom" constant="10" id="xOD-l6-Z8H"/>
                         </constraints>
                     </view>
@@ -897,8 +853,9 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="OG4-dI-YLL" id="KcI-tF-VQs"/>
-                                                <outlet property="delegate" destination="OG4-dI-YLL" id="mOr-Bu-8m6"/>
+                                                <outlet property="dataSource" destination="OG4-dI-YLL" id="sok-vV-BtY"/>
+                                                <outlet property="delegate" destination="OG4-dI-YLL" id="GfB-zi-7hU"/>
+                                                <outlet property="menu" destination="AQR-ZR-rXq" id="wWl-AU-o8P"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -930,6 +887,28 @@
                 </viewController>
                 <customObject id="Hze-fL-fcG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <treeController id="Faw-92-Oce"/>
+                <menu id="AQR-ZR-rXq">
+                    <items>
+                        <menuItem title="Show in Finder" id="FPC-Px-qBp">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="0h8-ID-CLl"/>
+                        <menuItem title="New File" id="olF-c8-SMX">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Add Existing Files" id="ytg-Ya-TA9">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="b0B-U4-Wyh"/>
+                        <menuItem title="Delete" id="hX8-df-0In">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="ncV-38-xvl"/>
+                        <menuItem title="New Group" id="ZW3-An-Mvb">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="717" y="864"/>
         </scene>
@@ -948,8 +927,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSFolder" width="32" height="32"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

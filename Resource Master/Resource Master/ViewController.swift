@@ -9,7 +9,7 @@
 import Cocoa
 
 
-let kResourceManagerFileDeletedOrCreated = NSNotification.Name("kResourceManagerFileDeletedOrCreated");
+let kResourceManagerFileDeleted = NSNotification.Name("kResourceManagerFileDeleted");
 
 class ViewController: NSViewController {
   
@@ -18,20 +18,20 @@ class ViewController: NSViewController {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-//    var path = UserDefaults.standard.object(forKey: DEFAULT_ROOT_PATH)
-//    path = path == nil ? "" : path
-//    self.labPath.stringValue = path as! String
-//    // handle those folder used to be a valide RMS workspace but not any more
-//    if !RMResourceManager.sharedInstance.checkingDefaultSettings(path: path as! String, showError: false) {
-//      UserDefaults.standard.removeObject(forKey: DEFAULT_ROOT_PATH)
-//    }
-//    
     NotificationCenter.default.addObserver(self, selector: #selector(updateRootFolderPath(notification:)), name: kResourceManagerNotificationRootChanged, object: nil)
   }
   
   @objc func updateRootFolderPath(notification : Notification) {
     let folderPath = String(describing: notification.object!)
     labPath.stringValue = folderPath
+  }
+  
+  override func viewDidAppear() {
+    let path = UserDefaults.standard.object(forKey: DEFAULT_ROOT_PATH);
+    if path != nil {
+      let folderPath = "\(path!)";
+      RMResourceManager.sharedInstance.gotoVerifiedWorkSpace(rootPath: folderPath);
+    }
   }
   
   
@@ -58,19 +58,7 @@ class ViewController: NSViewController {
   }
   
   @IBAction func didTapDelete(_ sender: Any) {
-    // TODO: Move logic to manager
-//    let targetUrl = RMFileSystemViewController.sharedInstance.selectedFileUrl
-//    if (targetUrl != "") {
-//      let fileManager = FileManager.default
-//      do {
-//        try fileManager.trashItem(at: URL(fileURLWithPath: targetUrl), resultingItemURL: nil)
-//        NotificationCenter.default.post(name: kResourceManagerFileDeletedOrCreated, object: nil)
-//        RMFileSystemViewController.sharedInstance.selectedFileUrl = ""
-//      }
-//      catch let error as NSError {
-//        print("Ooops! Something went wrong: \(error)")
-//      }
-//    }
+    NotificationCenter.default.post(name: kResourceManagerFileDeleted, object: nil)
   }
   
   @IBAction func clickRefresherButton(_ sender: Any) {

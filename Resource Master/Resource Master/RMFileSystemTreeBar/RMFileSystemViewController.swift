@@ -12,6 +12,7 @@ class RMFileSystemViewController: NSViewController {
   @IBOutlet weak var outLineView: NSOutlineView!
   let dateFormatter = DateFormatter()
   var fileTree: RMFileTree?;
+  var selectedFileTreeNode: RMFileTreeNode?;
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +23,7 @@ class RMFileSystemViewController: NSViewController {
 //    files = RMFilePathManager.fileList(folderPath)
 //    self.outLineView.reloadData()
     NotificationCenter.default.addObserver(self, selector: #selector(updateRootFolderPath(notification:)), name: kResourceManagerNotificationRootChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(removeSelectedFile(notification:)), name: kResourceManagerFileDeleted, object: nil)
 //    NotificationCenter.default.addObserver(self, selector: #selector(reloadOutLineView(notification:)), name: kResourceManagerFileDeletedOrCreated, object: nil)
     
   }
@@ -41,6 +43,9 @@ class RMFileSystemViewController: NSViewController {
     }
   }
   
+  @objc func removeSelectedFile(notification : Notification) {
+  }
+
   override var representedObject: Any? {
     didSet {
       // Update the view, if already loaded.
@@ -90,6 +95,11 @@ extension RMFileSystemViewController: NSOutlineViewDelegate {
         view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "nameCell"), owner: self) as? NSTableCellView
         if let textField = view?.textField {
           textField.stringValue = fileTreeNode.fileName
+          if (FileManager.default.fileExists(atPath: fileTreeNode.path!)) {
+            textField.textColor = NSColor.black;
+          } else {
+            textField.textColor = NSColor.red;
+          }
           textField.sizeToFit()
         }
 //        if let imageView = view?.imageView {
@@ -106,12 +116,14 @@ extension RMFileSystemViewController: NSOutlineViewDelegate {
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
-//    guard let outlineView = notification.object as? NSOutlineView else {
-//      return
-//    }
-//    let selectedIndex = outlineView.selectedRow
-//    if let feedItem = outlineView.item(atRow: selectedIndex) as? RMFileItem {
-//      RMFileSystemViewController.sharedInstance.selectedFileUrl = feedItem.filePathName()
-//    }
+    guard let outlineView = notification.object as? NSOutlineView else {
+      return
+    }
+    let selectedIndex = outlineView.selectedRow
+    if let feedItem = outlineView.item(atRow: selectedIndex) as? RMFileTreeNode {
+      selectedFileTreeNode = feedItem;
+    } else {
+      selectedFileTreeNode = nil;
+    }
   }
 }
