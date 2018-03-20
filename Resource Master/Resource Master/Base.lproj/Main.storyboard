@@ -853,7 +853,7 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="OG4-dI-YLL" id="sok-vV-BtY"/>
+                                                <outlet property="dataSource" destination="OG4-dI-YLL" id="F8I-fe-HK9"/>
                                                 <outlet property="delegate" destination="OG4-dI-YLL" id="GfB-zi-7hU"/>
                                                 <outlet property="menu" destination="AQR-ZR-rXq" id="wWl-AU-o8P"/>
                                             </connections>
@@ -882,6 +882,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="menuBar" destination="AQR-ZR-rXq" id="SrL-6Z-tbb"/>
                         <outlet property="outLineView" destination="Waz-af-BMN" id="9fM-cV-NiM"/>
                     </connections>
                 </viewController>
@@ -891,21 +892,36 @@
                     <items>
                         <menuItem title="Show in Finder" id="FPC-Px-qBp">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clickShowInFinder:" target="OG4-dI-YLL" id="RWe-Zo-Qnd"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="0h8-ID-CLl"/>
                         <menuItem title="New File" id="olF-c8-SMX">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clickNewFile:" target="OG4-dI-YLL" id="zoP-qW-XOv"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Add Existing Files" id="ytg-Ya-TA9">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clickAddExistingFiles:" target="OG4-dI-YLL" id="hsD-1H-72F"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="b0B-U4-Wyh"/>
                         <menuItem title="Delete" id="hX8-df-0In">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clickDeleting:" target="OG4-dI-YLL" id="vjU-xW-NGU"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="ncV-38-xvl"/>
                         <menuItem title="New Group" id="ZW3-An-Mvb">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clickNewGroup:" target="OG4-dI-YLL" id="Qdo-dH-a4f"/>
+                            </connections>
                         </menuItem>
                     </items>
                 </menu>

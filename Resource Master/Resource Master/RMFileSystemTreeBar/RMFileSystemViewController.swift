@@ -10,6 +10,7 @@ import Cocoa
 
 class RMFileSystemViewController: NSViewController {
   @IBOutlet weak var outLineView: NSOutlineView!
+  @IBOutlet var menuBar: NSMenu!
   let dateFormatter = DateFormatter()
   var fileTree: RMFileTree?;
   var selectedFileTreeNode: RMFileTreeNode?;
@@ -45,7 +46,33 @@ class RMFileSystemViewController: NSViewController {
   
   @objc func removeSelectedFile(notification : Notification) {
   }
-
+  
+  @IBAction func clickShowInFinder(_ sender: NSMenuItem) {
+    
+  }
+  
+  @IBAction func clickNewFile(_ sender: NSMenuItem) {
+  }
+  
+  @IBAction func clickAddExistingFiles(_ sender: NSMenuItem) {
+  }
+  
+  @IBAction func clickDeleting(_ sender: NSMenuItem) {
+    let clickedRow = outLineView.item(atRow: outLineView.clickedRow) as? RMFileTreeNode;
+    if clickedRow != nil {
+      if clickedRow!.parent == nil {
+        MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: "Unable to delte root folder");
+        return;
+      }
+      if MessageBoxManager.sharedInstance.showYesNoBox(title: "Warning !!", message: "Are you sure to delete " + clickedRow!.fileName + " ?") {
+        
+      }
+    }
+  }
+  
+  @IBAction func clickNewGroup(_ sender: NSMenuItem) {
+  }
+  
   override var representedObject: Any? {
     didSet {
       // Update the view, if already loaded.
