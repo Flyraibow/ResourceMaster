@@ -58,15 +58,15 @@ class RMFileSystemViewController: NSViewController {
   }
   
   @IBAction func clickDeleting(_ sender: NSMenuItem) {
-    let clickedRow = outLineView.item(atRow: outLineView.clickedRow) as? RMFileTreeNode;
-    if clickedRow != nil {
-      if clickedRow!.parent == nil {
+    let selectFileNode = outLineView.item(atRow: outLineView.clickedRow) as? RMFileTreeNode;
+    if selectFileNode != nil {
+      if selectFileNode!.parent == nil {
         MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: "Unable to delte root folder");
         return;
       }
-      if MessageBoxManager.sharedInstance.showYesNoBox(title: "Warning !!", message: "Are you sure to delete " + clickedRow!.fileName + " ?") {
-        
-      }
+      _ = selectFileNode!.parent!.deleteChildNode(childNode: selectFileNode!);
+      outLineView.reloadItem(selectFileNode!.parent!, reloadChildren: true)
+      _ = fileTree!.writeConfigToDisk();
     }
   }
   

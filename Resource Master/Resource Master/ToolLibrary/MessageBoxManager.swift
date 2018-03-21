@@ -30,6 +30,25 @@ class MessageBoxManager {
     return alert.runModal() == .alertFirstButtonReturn
   }
   
+  func show3ButtonBox(title: String = "", message: String, button1: String, button2: String, button3: String) -> NSInteger {
+    let alert: NSAlert = NSAlert()
+    alert.messageText = title
+    alert.informativeText = message
+    alert.alertStyle = NSAlert.Style.informational
+    alert.addButton(withTitle: button1)
+    alert.addButton(withTitle: button2)
+    alert.addButton(withTitle: button3)
+    let result = alert.runModal();
+    if (result == .alertFirstButtonReturn) {
+      return 0;
+    } else if (result == .alertSecondButtonReturn) {
+      return 1;
+    } else if (result == .alertThirdButtonReturn) {
+      return 2;
+    }
+    return 0;
+  }
+  
   
   func createWorkplace() -> String {
     let msg = NSAlert()

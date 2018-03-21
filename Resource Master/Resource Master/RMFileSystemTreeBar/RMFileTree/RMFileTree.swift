@@ -176,6 +176,36 @@ class RMFileTreeNode: NSObject {
     
     return dict;
   }
+  
+  // Node operation
+  func deleteChildNode(childNode : RMFileTreeNode) -> Bool {
+    if fileList != nil && fileList!.contains(childNode) {
+      if !FileManager.default.fileExists(atPath: childNode.path!) {
+        // Remove reference
+        if let index = childNode.parent!.fileList?.index(of: childNode) {
+          childNode.parent!.fileList?.remove(at: index);
+        }
+      } else {
+        let result = MessageBoxManager.sharedInstance.show3ButtonBox(title: "Warning !!", message: "Are you sure to delete " + childNode.fileName + " ?", button1: "Cancel", button2: "Remove Reference", button3: "Move to trash")
+        if result > 0 {
+          // Remove reference
+          if let index = childNode.parent!.fileList?.index(of: childNode) {
+            childNode.parent!.fileList?.remove(at: index);
+          }
+          if result == 2 {
+            // move to trash
+            do {
+              try FileManager.default.removeItem(atPath: childNode.path!);
+            } catch {
+              MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: "Unable to delte: " + childNode.path! + error.localizedDescription);
+              return false;
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
 
 }
 
