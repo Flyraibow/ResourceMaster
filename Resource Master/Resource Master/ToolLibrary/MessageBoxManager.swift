@@ -71,14 +71,14 @@ class MessageBoxManager {
   }
   
   func selectFiles() -> String? {
-    return self.showFolderSelectPanel(title: "Choose files", message: "Choose files you want to import", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: true)
+    return self.showFileSelectionPanel(title: "Choose files", message: "Choose files you want to import", sizeIndicator: true, showHidden: false, canChooseDirs: false, canCreateDirs: true, canChooseFiles: true)
   }
   
   func selectFolder() -> String? {
-    return self.showFolderSelectPanel(title: "Choose a folder", message: "Choose an empty folder to initial resource tree, or choose an existing folder to load", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true, allowMutiSelec: false, canChooseFiles: false)
+    return self.showFileSelectionPanel(title: "Choose a folder", message: "Choose an empty folder to initial resource tree, or choose an existing folder to load", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true, canChooseFiles: false)
   }
   
-  func showFolderSelectPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, allowMutiSelec: Bool, canChooseFiles: Bool) -> String? {
+  func showFileSelectionPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, canChooseFiles: Bool) -> String? {
     let dialog = NSOpenPanel();
     dialog.title                   =  title;
     dialog.message                 = message;
@@ -86,14 +86,35 @@ class MessageBoxManager {
     dialog.showsHiddenFiles        = showHidden;
     dialog.canChooseDirectories    = canChooseDirs;
     dialog.canCreateDirectories    = canCreateDirs;
-    dialog.allowsMultipleSelection = allowMutiSelec;
     dialog.canChooseFiles          = canChooseFiles;
+    dialog.allowsMultipleSelection = false;
     
     if (dialog.runModal() == NSApplication.ModalResponse.OK) {
       let result = dialog.url // Pathname of the file
       if (result != nil) {
         return result!.path
       }
+    }
+    return nil
+  }
+  
+  func showFilesSelectionPanel(title: String, message: String, sizeIndicator: Bool, showHidden: Bool, canChooseDirs: Bool, canCreateDirs: Bool, canChooseFiles: Bool) -> Array<String>? {
+    let dialog = NSOpenPanel();
+    dialog.title                   =  title;
+    dialog.message                 = message;
+    dialog.showsResizeIndicator    = sizeIndicator;
+    dialog.showsHiddenFiles        = showHidden;
+    dialog.canChooseDirectories    = canChooseDirs;
+    dialog.canCreateDirectories    = canCreateDirs;
+    dialog.canChooseFiles          = canChooseFiles;
+    dialog.allowsMultipleSelection = true;
+    
+    if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+      var paths = Array<String>();
+      for url in dialog.urls {
+        paths.append(url.path);
+      }
+      return paths;
     }
     return nil
   }

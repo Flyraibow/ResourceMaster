@@ -52,9 +52,27 @@ class RMFileSystemViewController: NSViewController {
   }
   
   @IBAction func clickNewFile(_ sender: NSMenuItem) {
+    // TODO:
   }
   
   @IBAction func clickAddExistingFiles(_ sender: NSMenuItem) {
+    let files = MessageBoxManager.sharedInstance.showFilesSelectionPanel(title: "Choose resources", message: "Choose any resources you wanna add to the workplace", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true,  canChooseFiles: true);
+    if files != nil && files!.count > 0 {
+      /* TODO:
+       For all of the readable files/folders (image, sound, component in the future)
+          if the file is already inside the root folder
+              + if it's already in the workplace
+                + if the select path is the same as resources' path
+                  + skip this file
+                  - ask whether to make a copy for it
+                - if the select path is the same as resources' path
+                  + add the file directly
+                  - ask whether to make a copy for it
+              - ask whether to make a copy for it
+       
+      */
+      
+    }
   }
   
   @IBAction func clickDeleting(_ sender: NSMenuItem) {
