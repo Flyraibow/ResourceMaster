@@ -207,6 +207,49 @@ class RMFileTreeNode: NSObject {
     return true;
   }
 
+  func fileExistByRelativeComponents(components: Array<String>) -> Bool {
+    var leftOver = components
+    for fileName in components {
+      leftOver.removeFirst();
+      if fileName.count > 0 {
+        if fileList != nil {
+          for fileNode in fileList! {
+            if fileNode.fileName == fileName {
+              if leftOver.isEmpty {
+                return true;
+              } else {
+                return fileNode.fileExistByRelativeComponents(components:leftOver);
+              }
+            }
+          }
+        }
+        break;
+      }
+    }
+    return false;
+  }
+  
+  func searchFileNodeByRelativeComponent(components: Array<String>) -> RMFileTreeNode? {
+    var leftOver = components
+    for fileName in components {
+      leftOver.removeFirst();
+      if fileName.count > 0 {
+        if fileList != nil {
+          for fileNode in fileList! {
+            if fileNode.fileName == fileName {
+              if leftOver.isEmpty {
+                return fileNode;
+              } else {
+                return fileNode.fileExistByRelativeComponents(components:leftOver);
+              }
+            }
+          }
+        }
+        break;
+      }
+    }
+    return nil;
+  }
 }
 
 class RMFileTree: NSObject {
@@ -293,6 +336,30 @@ class RMFileTree: NSObject {
       return false;
     }
     return self.virtualFileNode.validateCurrentFolderIfNeeded();
+  }
+  
+  func fileExistByPath(path: String) -> Bool {
+    if workPath != nil {
+      if path.starts(with: workPath!) {
+        let relativePathCount = path.count - workPath!.count;
+        let relativePath = path.suffix(relativePathCount);
+        let components = relativePath.components(separatedBy: "/");
+        return virtualFileNode.fileExistByRelativeComponents(components: components);
+      }
+    }
+    return false;
+  }
+  
+  func searchFileNodeByPath(path: String) -> RMFileTreeNode? {
+    if workPath != nil {
+      if path.starts(with: workPath!) {
+        let relativePathCount = path.count - workPath!.count;
+        let relativePath = path.suffix(relativePathCount);
+        let components = relativePath.components(separatedBy: "/");
+        return virtualFileNode.searchFileNodeByRelativeComponent(components: components);
+      }
+    }
+    return nil;
   }
 }
 

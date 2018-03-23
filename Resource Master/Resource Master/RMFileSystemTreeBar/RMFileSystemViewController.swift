@@ -56,22 +56,50 @@ class RMFileSystemViewController: NSViewController {
   }
   
   @IBAction func clickAddExistingFiles(_ sender: NSMenuItem) {
+    if fileTree == nil || fileTree!.workPath == nil {
+      MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: "No work place.");
+      return ;
+    }
     let files = MessageBoxManager.sharedInstance.showFilesSelectionPanel(title: "Choose resources", message: "Choose any resources you wanna add to the workplace", sizeIndicator: true, showHidden: false, canChooseDirs: true, canCreateDirs: true,  canChooseFiles: true);
     if files != nil && files!.count > 0 {
       /* TODO:
        For all of the readable files/folders (image, sound, component in the future)
-          if the file is already inside the root folder
-              + if it's already in the workplace
-                + if the select path is the same as resources' path
-                  + skip this file
+          if the file is already inside the root folder ✔️
+              + if it's already in the workplace ✔️
+                + if the select path is the same as resources' path ✔️
+                  + skip this file ✔️
                   - ask whether to make a copy for it
-                - if the select path is the same as resources' path
-                  + add the file directly
+                - if the select path is the same as resources' path ✔️
+                  + add the file directly (Need add all the descendant)
                   - ask whether to make a copy for it
               - ask whether to make a copy for it
        
       */
-      
+      let rootPath = fileTree!.workPath!;
+      let selectFileNode = outLineView.item(atRow: outLineView.clickedRow) as? RMFileTreeNode;
+      let isExpanded = outLineView.isItemExpanded(selectFileNode);
+      for filePath in files! {
+        if filePath.starts(with: rootPath) {
+          // The file is in work place path, make sure is it already added
+          if let fileNode = fileTree!.searchFileNodeByPath(path: filePath) {
+            if (isExpanded && fileNode.parent == selectFileNode) ||
+              (!isExpanded && fileNode.parent == selectFileNode!.parent) {
+              // It's already in workplace, skip it
+              continue;
+            } else {
+              
+            }
+          } else {
+            var fileFolderComponents = rootPath.components(separatedBy: "/")
+            fileFolderComponents.removeLast();
+            let fileFolderPath = fileFolderComponents.joined(separator: "/");
+            if (isExpanded && fileFolderPath == selectFileNode!.path) {
+            } else if !isExpanded && fileFolderPath == selectFileNode!.parent!.path {
+              
+            }
+          }
+        }
+      }
     }
   }
   
