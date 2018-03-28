@@ -240,7 +240,7 @@ class RMFileTreeNode: NSObject {
               if leftOver.isEmpty {
                 return fileNode;
               } else {
-                return fileNode.fileExistByRelativeComponents(components:leftOver);
+                return fileNode.searchFileNodeByRelativeComponent(components:leftOver);
               }
             }
           }

@@ -72,7 +72,7 @@ class RMFileSystemViewController: NSViewController {
                 - if the select path is the same as resources' path ✔️
                   + add the file directly (Need add all the descendant)
                   - ask whether to make a copy for it
-              - ask whether to make a copy for it
+          - ask whether to make a copy for it
        
       */
       let rootPath = fileTree!.workPath!;
@@ -87,13 +87,16 @@ class RMFileSystemViewController: NSViewController {
               // It's already in workplace, skip it
               continue;
             } else {
+              // ask whether to make a copy for it
               
             }
           } else {
+            //
             var fileFolderComponents = rootPath.components(separatedBy: "/")
             fileFolderComponents.removeLast();
             let fileFolderPath = fileFolderComponents.joined(separator: "/");
             if (isExpanded && fileFolderPath == selectFileNode!.path) {
+              
             } else if !isExpanded && fileFolderPath == selectFileNode!.parent!.path {
               
             }
