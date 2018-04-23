@@ -69,6 +69,7 @@ class RMFileSystemViewController: NSViewController {
                 + if the select path is the same as resources' path ✔️
                   + skip this file ✔️
                   - ask whether to make a copy for it
+                    + add file along with all descends
                 - if the select path is the same as resources' path ✔️
                   + add the file directly (Need add all the descendant)
                   - ask whether to make a copy for it
@@ -79,19 +80,26 @@ class RMFileSystemViewController: NSViewController {
       let selectFileNode = outLineView.item(atRow: outLineView.clickedRow) as? RMFileTreeNode;
       let isExpanded = outLineView.isItemExpanded(selectFileNode);
       for filePath in files! {
+        let fileName = (filePath as NSString).lastPathComponent;
         if filePath.starts(with: rootPath) {
           // The file is in work place path, make sure is it already added
           if let fileNode = fileTree!.searchFileNodeByPath(path: filePath) {
             if (isExpanded && fileNode.parent == selectFileNode) ||
               (!isExpanded && fileNode.parent == selectFileNode!.parent) {
-              // It's already in workplace, skip it
+              // It's already in workplace and in the same path, skip it
+              MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: "\(filePath) is already added in current location. Skip this file");
               continue;
             } else {
               // ask whether to make a copy for it
-              
+              if (MessageBoxManager.sharedInstance.showYesNoBox(message: "\(filePath) is already added in the workplace. Do you wanna make a copy for it?")) {
+                let path = isExpanded ? fileNode.path! + "/" + fileName : fileNode.parent!.path! + "/" + fileName;
+                if (self.copyFile(fromPath: filePath, toPath: path)) {
+                  
+                }
+              }
             }
           } else {
-            //
+            // The file is not in work place path
             var fileFolderComponents = rootPath.components(separatedBy: "/")
             fileFolderComponents.removeLast();
             let fileFolderPath = fileFolderComponents.joined(separator: "/");
@@ -126,6 +134,20 @@ class RMFileSystemViewController: NSViewController {
     didSet {
       // Update the view, if already loaded.
     }
+  }
+  
+  func copyFile(fromPath: String, toPath: String) -> Bool {
+    do {
+      try FileManager.default.copyItem(atPath: fromPath, toPath: toPath);
+    } catch {
+      MessageBoxManager.sharedInstance.showErrorMessage(errorMsg: "Unable to copy file because: " + error.localizedDescription);
+      return false;
+    }
+    return true;
+  }
+  
+  func addCheckedExistingFile(filePath : String) -> Bool {
+    
   }
   
   deinit {
